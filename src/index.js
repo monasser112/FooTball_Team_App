@@ -1,0 +1,25 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import './App.css';
+import { BrowserRouter } from 'react-router-dom'
+import Routes from './routes'
+import {firebase} from './firebase'
+
+const App=(props)=>{
+
+    return(
+        <BrowserRouter>
+            <Routes {...props} />
+        </BrowserRouter>
+    )
+}
+
+firebase.auth().onAuthStateChanged(user=>{
+    console.log(user)
+    user?console.log('true'):console.log('false')
+    ReactDOM.render(<App user={user} />, document.getElementById('root'));
+
+})
+
+
